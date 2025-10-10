@@ -1,12 +1,16 @@
+// CLI task dosyasını ekle
+import "./tasks/OrderBook";
 import "@fhevm/hardhat-plugin";
 import "@nomicfoundation/hardhat-ethers";
 import "hardhat-deploy";
 import "hardhat-gas-reporter";
-import type { HardhatUserConfig } from "hardhat/config";
-import { vars } from "hardhat/config";
+import type { HardhatUserConfig } from "hardhat/types";
+
+// CLI task dosyasını ekle
+import "./tasks/OrderBook";
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.20",
+  solidity: "0.8.24",
   namedAccounts: {
     deployer: {
       default: 0,
@@ -15,10 +19,6 @@ const config: HardhatUserConfig = {
   networks: {
     localhost: {
       url: "http://127.0.0.1:8545",
-    },
-    sepolia: {
-      url: `https://sepolia.infura.io/v3/${vars.get("INFURA_API_KEY")}`,
-      accounts: { mnemonic: vars.get("MNEMONIC") },
     },
   },
   gasReporter: {

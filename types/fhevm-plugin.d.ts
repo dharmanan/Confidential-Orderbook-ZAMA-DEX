@@ -4,7 +4,11 @@
 import "hardhat/types/runtime";
 
 declare module "hardhat/types/runtime" {
-  interface HardhatRuntimeEnvironment {
-    fhevm?: any;
+  export interface HardhatRuntimeEnvironment {
+    fhevm: {
+      initializeCLIApi: () => Promise<void>;
+      // Diğer FHEVM fonksiyonlarını burada ekleyebilirsiniz
+        encryptUint: (fhevmType: number, value: number, contractAddress: string, userAddress: string) => Promise<{ externalEuint: string, inputProof: string }>;
+    };
   }
 }

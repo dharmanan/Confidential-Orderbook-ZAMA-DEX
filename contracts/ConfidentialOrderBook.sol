@@ -1,36 +1,42 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-// FHEVM v0.7 importlarını sürümüne göre AYARLAYACAĞIZ.
-// import "fhevm/lib/FHE.sol";
+
+import "@fhevm/solidity/lib/FHE.sol";
+import {FheType} from "@fhevm/solidity/lib/FheType.sol";
 
 contract ConfidentialOrderBook {
-    struct Order {
-        // bytes encryptedPrice; // FHE ile şifreli
-        // bytes encryptedQty;   // FHE ile şifreli
-        uint256 price;
-        uint256 qty;
-        bool isBuy;
+    bytes32 bestBidPrice;
+    bytes32 bestBidQty;
+    bytes32 bestAskPrice;
+    bytes32 bestAskQty;
+
+    event OrderPlaced(bool isBuy, bytes32 priceHandle, bytes32 qtyHandle);
+    event TopOfBookUpdated(bool isBuy, bytes32 priceHandle, bytes32 qtyHandle);
+
+    constructor() {}
+
+    function placeOrder(
+        bool isBuy,
+        bytes32 priceHandle,
+        bytes32 qtyHandle
+    ) external {
+        if (isBuy) {
+            bestBidPrice = priceHandle;
+            bestBidQty = qtyHandle;
+            emit TopOfBookUpdated(true, priceHandle, qtyHandle);
+        } else {
+            bestAskPrice = priceHandle;
+            bestAskQty = qtyHandle;
+            emit TopOfBookUpdated(false, priceHandle, qtyHandle);
+        }
+        emit OrderPlaced(isBuy, priceHandle, qtyHandle);
     }
 
-    Order public bestBid;
-    Order public bestAsk;
-
-    event OrderPlaced(bool isBuy, uint256 price, uint256 qty);
-
-    function placeOrder(bool isBuy, uint256 price, uint256 qty) external {
-        // Şifreli karşılaştırma ve güncelleme satırları şimdilik yorumda
-        // if (isBuy && FHE.gt(price, bestBid.price)) { ... }
-        // if (!isBuy && FHE.lt(price, bestAsk.price)) { ... }
-        if (isBuy) {
-            if (price > bestBid.price) {
-                bestBid = Order(price, qty, true);
-            }
-        } else {
-            if (bestAsk.price == 0 || price < bestAsk.price) {
-                bestAsk = Order(price, qty, false);
-            }
-        }
-        emit OrderPlaced(isBuy, price, qty);
+    function getTopOfBook() external view returns (bytes32 bidPrice, bytes32 bidQty, bytes32 askPrice, bytes32 askQty) {
+        bidPrice = bestBidPrice;
+        bidQty = bestBidQty;
+        askPrice = bestAskPrice;
+        askQty = bestAskQty;
     }
 }
