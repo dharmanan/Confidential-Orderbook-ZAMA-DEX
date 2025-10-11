@@ -36,15 +36,16 @@ node scripts/placeOrder.js
 - Localhost (default Hardhat node)
 - Sepolia (set RPC and keys in .env)
 
-## Sepolia Testnet ile Kullanım
 
-### Sepolia'ya Deploy ve Order Komutları
+## Sepolia Testnet Usage
+
+### Deploy and Order Commands on Sepolia
 ```
 npx hardhat --network sepolia order:place --side buy --price 101 --qty 5
 npx hardhat --network sepolia order:tob
 ```
 
-### Sepolia için .env Ayarları
+### Sepolia .env Settings
 ```
 SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/YOUR_INFURA_KEY
 SEPOLIA_DEPLOYER_KEY=0xYOUR_PRIVATE_KEY

@@ -1,42 +1,57 @@
-# Confidential Orderbook DEX ZAMA PROJECT (FHEVM)
+# Confidential Orderbook DEX (Zama FHEVM)
 
-## Project Purpose
-This project is a minimal DEX prototype that uses Zama FHEVM technology to keep on-chain orderbook data fully confidential. The goal is to store orders and top of book data as encrypted (bytes32 handle) on-chain, so only authorized parties can decrypt and access them.
+## Project Overview
+This project is a minimal confidential DEX prototype built with Zama FHEVM. It demonstrates fully encrypted on-chain orderbook management, where all order and top-of-book data is stored as encrypted bytes32 handles. Only authorized parties can decrypt and access the data, ensuring privacy and security.
 
-## What We Did
-- Built a FHEVM ready Hardhat project.
-- Developed ConfidentialOrderBook.sol: a minimal contract that stores encrypted orders and top of book state.
-- Solved TypeScript, plugin, and type errors.
-- Implemented Hardhat tasks for buy/sell/top of book operations via CLI.
-- Added ENV/CLI-powered automation scripts and batch demo infrastructure.
-- Provided support for both Sepolia and local networks.
+## Key Features
+- Fully confidential orderbook and top-of-book state using Zama FHEVM
+- Hardhat-based smart contract and CLI automation
+- Live frontend displaying encrypted orderbook state and event history
+- Event stream and order history fetched directly from the blockchain
+- Support for local Hardhat node and Sepolia testnet
 
-## Technologies Used
-- [Zama FHEVM](https://github.com/zama-ai/fhevm): Main technology for encrypted EVM operations.
-- @fhevm/hardhat-plugin, @fhevm/solidity
-- Hardhat, hardhat deploy, hardhat gas reporter
-- TypeScript, Node.js, dotenv, concurrently, wait-on
+## Technologies
+- Zama FHEVM, @fhevm/hardhat-plugin, @fhevm/solidity
+- Hardhat, TypeScript, Node.js
+- Next.js (React) frontend
 
-## FHE & Zama Integration
-- Contract state and events are stored as encrypted bytes32 handles using Zama FHEVM.
-- Orders are encrypted and written to the chain via the Hardhat plugin and FHEVM API.
-- Demo and test flows are fully FHEVM-compatible using ENV/CLI and automation scripts.
+## Setup & Usage
+1. Install dependencies:
+	```bash
+	npm install
+	cd frontend && npm install
+	```
+2. Start local Hardhat node:
+	```bash
+	npx hardhat node
+	```
+3. Deploy contract:
+	```bash
+	npx hardhat deploy --network localhost
+	```
+4. Start frontend:
+	```bash
+	cd frontend && npm run dev
+	```
+5. Place orders and view live orderbook/events via CLI or frontend.
 
-## Sepolia Testnet
-Sepolia ağı için .env dosyasına aşağıdaki satırları ekleyin:
-```
-SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/YOUR_INFURA_KEY
-SEPOLIA_DEPLOYER_KEY=0xYOUR_PRIVATE_KEY
-```
-Sepolia üzerinde deploy ve order işlemleri için:
-```
-npx hardhat --network sepolia order:place --side buy --price 101 --qty 5
-npx hardhat --network sepolia order:tob
-```
+## Demo & Testing
+- Use CLI tasks to place orders and view top-of-book:
+  ```bash
+  npx hardhat --network localhost order:place --side buy --price 101 --qty 5
+  npx hardhat --network localhost order:tob
+  npx hardhat --network localhost order:events
+  ```
+- Frontend displays live encrypted orderbook and event history from the contract.
 
-## Zama Developer Program Submission
-This project is submitted for the Zama Developer Program monthly project competition. The aim is to demonstrate practical usage of FHEVM for on-chain privacy and encrypted orderbook applications, and to provide an open example for the community.
+## Technical Innovation
+- All order and state data is encrypted on-chain using Zama FHEVM, providing true privacy for DEX operations.
+- Event stream and order history are fetched live from the blockchain, demonstrating practical FHEVM usage.
+- Minimal, clean codebase with English documentation and UI.
+
+## Submission Summary
+This project is submitted for the Zama Developer Program competition. It showcases practical, privacy-preserving DEX design using FHEVM, with a focus on encrypted state, event streaming, and open-source best practices.
 
 ---
 
-See SCRIPTS.md for usage and demo commands.
+See SCRIPTS.md for CLI usage and automation details.

@@ -1,3 +1,109 @@
+.orderbook-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  background: rgba(255,255,255,0.10);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px #2c5364;
+}
+.orderbook-table th, .orderbook-table td {
+  padding: 12px 16px;
+  text-align: center;
+}
+.orderbook-table th {
+  background: #1e3c72;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.orderbook-table td {
+  color: #fff;
+  font-size: 1rem;
+}
+.orderbook-table tr:nth-child(even) {
+  background: rgba(44,83,100,0.18);
+}
+.orderbook-table tr:nth-child(odd) {
+  background: rgba(44,83,100,0.10);
+}
+/* Ana arka plan ve grid düzeni */
+.dex-main-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dex-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  max-width: 900px;
+  margin: 64px auto 0 auto;
+}
+
+.dex-card {
+  background: rgba(255,255,255,0.08);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(44,83,100,0.18);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dex-form-card {
+  min-width: 320px;
+  max-width: 400px;
+}
+
+.dex-orderbook-card {
+  min-width: 320px;
+  max-width: 400px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.dex-btn {
+  background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px #2c5364;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+.dex-btn:hover {
+  background: linear-gradient(90deg, #2a5298 0%, #1e3c72 100%);
+}
+
+.orderbook-title {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.orderbook-img {
+  max-width: 320px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #2c5364;
+  margin-bottom: 12px;
+}
+.orderbook-desc {
+  color: #b2bec3;
+  font-size: 1rem;
+  text-align: center;
+}
 body {
   background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
   font-family: 'Inter', 'Roboto', Arial, sans-serif;

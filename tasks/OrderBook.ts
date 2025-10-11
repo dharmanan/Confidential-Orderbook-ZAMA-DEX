@@ -1,6 +1,21 @@
 import { task } from "hardhat/config";
+
+// OrderPlaced eventlerini ve şifreli state akışını gösteren task
+task("order:events", "Show OrderPlaced events (encrypted handles)")
+  .setAction(async (_, hre: HardhatRuntimeEnvironment) => {
+    await hre.fhevm.initializeCLIApi();
+    const deployments = await hre.deployments.get("ConfidentialOrderBook");
+    const contract = await hre.ethers.getContractAt("ConfidentialOrderBook", deployments.address) as any;
+    const filter = contract.filters.OrderPlaced();
+    const logs = await contract.queryFilter(filter);
+    console.log("OrderPlaced events:");
+    logs.forEach((log: any, idx: number) => {
+      console.log(`#${idx+1}: isBuy=${log.args.isBuy} priceHandle=${log.args.priceHandle} qtyHandle=${log.args.qtyHandle}`);
+    });
+  });
 import type { HardhatRuntimeEnvironment } from "hardhat/types";
 import { ethers } from "hardhat";
+// @ts-ignore
 import { FhevmType } from "@fhevm/mock-utils";
 import type { TaskArguments } from "hardhat/types";
 
@@ -18,25 +33,18 @@ task("order:tob", "Show top-of-book (encrypted)")
 
 
 task("order:place", "Place an order (buy/sell)")
-  .addParam("side", "buy or sell")
-  .addParam("price", "Order price")
-  .addParam("qty", "Order quantity")
+  .addParam("isbuy", "true for buy, false for sell")
+  .addParam("pricehandle", "Encrypted price handle (bytes32)")
+  .addParam("qtyhandle", "Encrypted quantity handle (bytes32)")
   .setAction(async (taskArgs: TaskArguments, hre: HardhatRuntimeEnvironment) => {
     await hre.fhevm.initializeCLIApi();
     const [signer] = await hre.ethers.getSigners();
     const deployments = await hre.deployments.get("ConfidentialOrderBook");
     const contract = await hre.ethers.getContractAt("ConfidentialOrderBook", deployments.address) as any;
-    const isBuy = taskArgs.side === "buy";
-    const userAddress = await signer.getAddress();
-  // Mevcut FHEVM plugin API: encrypt ile şifreli handle üretimi
-    // Mock şifreleme: uint256 değeri bytes32'ye çevir (gerçek FHEVM handle yerine demo amaçlı)
-    function mockEncryptUint(val: number): string {
-      // Basitçe hex'e çevirip 0x ile başlat, 32 byte'a pad et
-      return '0x' + val.toString(16).padStart(64, '0');
-    }
-    const priceEnc = mockEncryptUint(Number(taskArgs.price));
-    const qtyEnc = mockEncryptUint(Number(taskArgs.qty));
+    const isBuy = taskArgs.isbuy === "true" || taskArgs.isbuy === true;
+    const priceEnc = taskArgs.pricehandle;
+    const qtyEnc = taskArgs.qtyhandle;
     const tx = await contract.connect(signer).placeOrder(isBuy, priceEnc, qtyEnc);
     await tx.wait();
-    console.log(`Order placed: ${taskArgs.side} price=${taskArgs.price} qty=${taskArgs.qty}`);
+    console.log(`Order placed: isBuy=${isBuy} priceHandle=${priceEnc} qtyHandle=${qtyEnc}`);
   });
