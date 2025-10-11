@@ -3,18 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-  "node": "hardhat node",
-  "deploy:localhost": "hardhat deploy --network localhost",
-  "buy:localhost": "hardhat --network localhost order:place --side buy --price 101 --qty 5",
-  "sell:localhost": "hardhat --network localhost order:place --side sell --price 102 --qty 1",
-  "tob:localhost": "hardhat --network localhost order:tob",
-  "deploy:sepolia": "hardhat deploy --network sepolia",
-  "buy:sepolia": "hardhat --network sepolia order:place --side buy --price 101 --qty 5",
-  "sell:sepolia": "hardhat --network sepolia order:place --side sell --price 102 --qty 1",
-  "tob:sepolia": "hardhat --network sepolia order:tob"
+    "node": "hardhat node",
+    "deploy:localhost": "hardhat deploy --network localhost",
+    "buy:localhost": "hardhat --network localhost order:place --side buy --price 101 --qty 5",
+    "sell:localhost": "hardhat --network localhost order:place --side sell --price 102 --qty 1",
+    "tob:localhost": "hardhat --network localhost order:tob",
+    "deploy:sepolia": "hardhat deploy --network sepolia",
+    "buy:sepolia": "hardhat --network sepolia order:place --side buy --price 101 --qty 5",
+    "sell:sepolia": "hardhat --network sepolia order:place --side sell --price 102 --qty 1",
+    "tob:sepolia": "hardhat --network sepolia order:tob"
   },
   "devDependencies": {
-    "@fhevm/hardhat-plugin": "latest",
+    "@fhevm/hardhat-plugin": "^0.1.0",
     "@fhevm/solidity": "^0.8.0",
     "@nomicfoundation/hardhat-ethers": "^3.0.0",
     "fhevm": "^0.6.2",
@@ -23,5 +23,8 @@
     "hardhat-gas-reporter": "^1.0.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "ethers": "^6.15.0"
   }
 }

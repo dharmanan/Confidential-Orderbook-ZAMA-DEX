@@ -22,6 +22,18 @@ This project is a minimal DEX prototype that uses Zama FHEVM technology to keep 
 - Orders are encrypted and written to the chain via the Hardhat plugin and FHEVM API.
 - Demo and test flows are fully FHEVM-compatible using ENV/CLI and automation scripts.
 
+## Sepolia Testnet
+Sepolia ağı için .env dosyasına aşağıdaki satırları ekleyin:
+```
+SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/YOUR_INFURA_KEY
+SEPOLIA_DEPLOYER_KEY=0xYOUR_PRIVATE_KEY
+```
+Sepolia üzerinde deploy ve order işlemleri için:
+```
+npx hardhat --network sepolia order:place --side buy --price 101 --qty 5
+npx hardhat --network sepolia order:tob
+```
+
 ## Zama Developer Program Submission
 This project is submitted for the Zama Developer Program monthly project competition. The aim is to demonstrate practical usage of FHEVM for on-chain privacy and encrypted orderbook applications, and to provide an open example for the community.
 

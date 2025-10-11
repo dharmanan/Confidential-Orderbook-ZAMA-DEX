@@ -1,0 +1,112 @@
+body {
+  background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+}
+
+.dex-container {
+  max-width: 480px;
+  margin: 48px auto;
+  background: rgba(255,255,255,0.08);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(44,83,100,0.18);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dex-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 16px #2c5364;
+}
+
+.dex-desc {
+  color: #b2bec3;
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.order-form {
+  background: rgba(255,255,255,0.18);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(44,83,100,0.12);
+  padding: 24px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.order-form label {
+  color: #fff;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.order-form input, .order-form select {
+  background: #222f3e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-right: 12px;
+  font-size: 1rem;
+}
+
+.order-form button {
+  background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px #2c5364;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.order-form button:hover {
+  background: linear-gradient(90deg, #2a5298 0%, #1e3c72 100%);
+}
+
+.status {
+  color: #00b894;
+  font-weight: 600;
+  margin-top: 12px;
+  text-align: center;
+}
+
+.orderbook-demo {
+  background: rgba(255,255,255,0.12);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(44,83,100,0.10);
+  padding: 18px;
+  margin-top: 12px;
+  width: 100%;
+  text-align: center;
+}
+.orderbook-demo img {
+  max-width: 320px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #2c5364;
+}
+.orderbook-demo h2 {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.orderbook-demo p {
+  color: #b2bec3;
+  font-size: 0.95rem;
+}
+
+.dex-footer {
+  color: #b2bec3;
+  text-align: center;
+  margin-top: 32px;
+  font-size: 0.95rem;
+}

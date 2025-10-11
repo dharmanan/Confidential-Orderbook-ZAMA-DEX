@@ -7,8 +7,15 @@ declare module "hardhat/types/runtime" {
   export interface HardhatRuntimeEnvironment {
     fhevm: {
       initializeCLIApi: () => Promise<void>;
-      // Diğer FHEVM fonksiyonlarını burada ekleyebilirsiniz
-        encryptUint: (fhevmType: number, value: number, contractAddress: string, userAddress: string) => Promise<{ externalEuint: string, inputProof: string }>;
+      encrypt: (params: { value: number, publicKey: string, signature: string, type: string }) => Promise<{ euint: string }>;
+      getPublicKey: (userAddress: string) => Promise<string>;
+      sign: (userAddress: string) => Promise<string>;
+      createEncryptedInput: (contractAddress: string, userAddress: string) => Promise<RelayerEncryptedInput>;
     };
+  }
+  export interface RelayerEncryptedInput {
+    add32: (value: number) => void;
+    encrypt: () => Promise<void>;
+    toBytes32Array: () => [string, string];
   }
 }

@@ -36,6 +36,20 @@ node scripts/placeOrder.js
 - Localhost (default Hardhat node)
 - Sepolia (set RPC and keys in .env)
 
+## Sepolia Testnet ile Kullanım
+
+### Sepolia'ya Deploy ve Order Komutları
+```
+npx hardhat --network sepolia order:place --side buy --price 101 --qty 5
+npx hardhat --network sepolia order:tob
+```
+
+### Sepolia için .env Ayarları
+```
+SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/YOUR_INFURA_KEY
+SEPOLIA_DEPLOYER_KEY=0xYOUR_PRIVATE_KEY
+```
+
 ## Notes
 - All order and top-of-book data is encrypted using Zama FHEVM.
 - See README.md for project details and Zama Developer Program submission info.

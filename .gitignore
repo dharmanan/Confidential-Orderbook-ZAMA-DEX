@@ -1,1 +1,3 @@
+# Güvenlik için .env dosyasını hariç tut
+.env
 node_modules
