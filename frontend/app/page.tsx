@@ -8,7 +8,9 @@ type OrderEvent = {
   priceHandle: string;
   qtyHandle: string;
 };
+
 import { ethers, BrowserProvider } from "ethers";
+import abi from "../abi/ConfidentialOrderBook.json";
 import "./custom-theme.css";
 
 declare global {
@@ -17,7 +19,6 @@ declare global {
   }
 
 }
-
 
 export default function Home() {
   const [side, setSide] = useState("buy");
@@ -50,8 +51,7 @@ export default function Home() {
       try {
         const provider = new ethers.JsonRpcProvider("http://localhost:8545");
         const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-        const abi = require("../abi/ConfidentialOrderBook.json");
-        const contract = new ethers.Contract(contractAddress, abi, provider);
+  const contract = new ethers.Contract(contractAddress, abi, provider);
         const tob = await contract.getTopOfBook();
         setOrderbook({
           bidPrice: tob.bidPrice,
@@ -79,8 +79,7 @@ export default function Home() {
       await provider.send("eth_requestAccounts", []);
       const signer = await provider.getSigner();
       const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-      const abi = require("../abi/ConfidentialOrderBook.json");
-      const contract = new ethers.Contract(contractAddress, abi, signer);
+  const contract = new ethers.Contract(contractAddress, abi, signer);
       const tx = await contract.placeOrder(side, price, qty);
       await tx.wait();
       setStatus("Order sent! Tx: " + tx.hash);

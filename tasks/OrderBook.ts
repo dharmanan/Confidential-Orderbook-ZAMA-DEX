@@ -5,7 +5,8 @@ task("order:events", "Show OrderPlaced events (encrypted handles)")
   .setAction(async (_, hre: HardhatRuntimeEnvironment) => {
     await hre.fhevm.initializeCLIApi();
     const deployments = await hre.deployments.get("ConfidentialOrderBook");
-    const contract = await hre.ethers.getContractAt("ConfidentialOrderBook", deployments.address) as any;
+  // @ts-ignore
+  const contract = await hre.ethers.getContractAt("ConfidentialOrderBook", deployments.address) as any;
     const filter = contract.filters.OrderPlaced();
     const logs = await contract.queryFilter(filter);
     console.log("OrderPlaced events:");
@@ -14,7 +15,7 @@ task("order:events", "Show OrderPlaced events (encrypted handles)")
     });
   });
 import type { HardhatRuntimeEnvironment } from "hardhat/types";
-import { ethers } from "hardhat";
+import "@nomicfoundation/hardhat-ethers";
 // @ts-ignore
 import { FhevmType } from "@fhevm/mock-utils";
 import type { TaskArguments } from "hardhat/types";
@@ -24,7 +25,8 @@ task("order:tob", "Show top-of-book (encrypted)")
   .setAction(async (_, hre: HardhatRuntimeEnvironment) => {
     await hre.fhevm.initializeCLIApi();
     const deployments = await hre.deployments.get("ConfidentialOrderBook");
-    const contract = await hre.ethers.getContractAt("ConfidentialOrderBook", deployments.address) as any;
+  // @ts-ignore
+  const contract = await hre.ethers.getContractAt("ConfidentialOrderBook", deployments.address) as any;
     const tob = await contract.getTopOfBook();
     console.log("Top-of-book (encrypted handles):");
     console.log(`Bid: price=${tob.bidPrice} qty=${tob.bidQty}`);
@@ -38,9 +40,11 @@ task("order:place", "Place an order (buy/sell)")
   .addParam("qtyhandle", "Encrypted quantity handle (bytes32)")
   .setAction(async (taskArgs: TaskArguments, hre: HardhatRuntimeEnvironment) => {
     await hre.fhevm.initializeCLIApi();
-    const [signer] = await hre.ethers.getSigners();
+  // @ts-ignore
+  const [signer] = await hre.ethers.getSigners();
     const deployments = await hre.deployments.get("ConfidentialOrderBook");
-    const contract = await hre.ethers.getContractAt("ConfidentialOrderBook", deployments.address) as any;
+  // @ts-ignore
+  const contract = await hre.ethers.getContractAt("ConfidentialOrderBook", deployments.address) as any;
     const isBuy = taskArgs.isbuy === "true" || taskArgs.isbuy === true;
     const priceEnc = taskArgs.pricehandle;
     const qtyEnc = taskArgs.qtyhandle;
